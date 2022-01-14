@@ -1,7 +1,7 @@
 # cri_disc_m1_robotic
 
  Everything is on GitHub
-Here is the link : https://github.com/Azadi97/cridiscm1_robotic Final Robot: Blind Check, The robotic Dog (robotic for good)
+Here is the link : https://github.com/Azadi97/cri_disc_m1_robotic Final Robot: Blind Check, The robotic Dog (robotic for good)
 Problem : make a robotic dog able to guide the user from point A to point B.
 
 Robotic Challenge (assigned by Kevin and Rajeev): Map a Room
