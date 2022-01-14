@@ -1,0 +1,52 @@
+#include <Wire.h>
+//#include <ZumoShield.h>
+#include <ZumoMotors.h>
+#include <Pushbutton.h>
+#include <EEPROM.h>
+
+ZumoMotors motors;
+Pushbutton button(ZUMO_BUTTON); // pushbutton on pin 12
+int a = 0;
+int value;
+int rvalue;
+
+void setup() {
+  // Will begin working once button 12 is pressed
+  button.waitForButton();
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+//read first value from eeprom memoryand proceed accordingly
+//111 = turn right
+value = EEPROM.read(a);
+  if (value == 111){
+    motors.setSpeeds(100, -100);
+    delay(250);
+    }
+//if value is 222 then turn left
+  else if (value == 222){
+    motors.setSpeeds(-100, 100);
+    delay(250);
+    }
+//if value is 255 then it means its empty and you stop zumo
+  else if (value == 255){
+    motors.setSpeeds(0, 0);
+  }
+  else{
+//if none of the above, then its the delay time that the zumo should take until next turn. 
+// since zumo memory can only store digits less than 255 thats why we read value from eeprom memory 
+// and multiply it with 100. ex: if value is 23 then 23 * 100 = 2300 which means 2.3 seconds.
+    rvalue = value * 100;
+    motors.setSpeeds(100, 100);
+    delay(rvalue);
+  }
+  a = a + 1;
+
+  if (a == 20)
+  a = 0;
+
+  delay(500);
+}
+  
